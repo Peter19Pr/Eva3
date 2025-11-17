@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Ejercicio 1{% endblock %}
+
+{% block content %}
+<h2>Ejercicio 1: Promedio y estado</h2>
+
+<form method="post" class="formulario">
+    <label>Nota 1 (10 a 70):
+        <input type="number" name="nota1" min="10" max="70" step="1"
+               value="{{ nota1|default('') }}">
+    </label>
+
+    <label>Nota 2 (10 a 70):
+        <input type="number" name="nota2" min="10" max="70" step="1"
+               value="{{ nota2|default('') }}">
+    </label>
+
+    <label>Nota 3 (10 a 70):
+        <input type="number" name="nota3" min="10" max="70" step="1"
+               value="{{ nota3|default('') }}">
+    </label>
+
+    <label>Asistencia (% 0 a 100):
+        <input type="number" name="asistencia" min="0" max="100" step="1"
+               value="{{ asistencia|default('') }}">
+    </label>
+
+    <button type="submit" class="btn">Enviar</button>
+</form>
+
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if resultado %}
+    <div class="resultado">
+        <p>Promedio: <strong>{{ resultado.promedio }}</strong></p>
+        <p>Asistencia: <strong>{{ resultado.asistencia }} %</strong></p>
+        <p>Estado:
+            <strong class="{{ 'aprobado' if resultado.estado == 'APROBADO' else 'reprobado' }}">
+                {{ resultado.estado }}
+            </strong>
+        </p>
+    </div>
+{% endif %}
+{% endblock %}
